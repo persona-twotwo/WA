@@ -5,24 +5,18 @@ session_start();
 /* 이전 페이지에서 값 가져오기 */
 $u_id = $_POST["u_id"];
 $pwd = $_POST["pwd"];
-// echo "ID : ".$u_id." / PW : ".$pwd;
-echo "$u_id<br/>";
 
 
 
 /* DB 접속 */
 require "db_connect.php";
 $db = db_connect("db_board");
-echo "$pwd<br/>";
 
 /* 쿼리 작성 */
-$querry = "SELECT id, passwd, nick, number FROM member WHERE id='$u_id';";
+$querry = "SELECT id, passwd, nick, number, permit FROM member WHERE id='$u_id';";
 // echo $sql;
-echo "1111<br/>";
-
 /* 쿼리 전송(연결 객체) */
 $result = mysqli_fetch_array(mysqli_query($db, $querry));
-echo "1111<br/>";
 
 /* DB에서 결과값 가져오기 */
 // mysqli_fetch_row // 필드 순서
@@ -55,7 +49,7 @@ if(!$result){ // 아이디가 존재하지 않으면
         $_SESSION["s_idx"] = $result["number"];
         $_SESSION["s_name"] = $result["nick"];
         $_SESSION["s_id"] = $result["id"];
-        echo "idx : ".$_SESSION["s_idx"]." / "."NAME : ".$_SESSION["s_name"]." / "."ID : ".$_SESSION["s_id"];
+        $_SESSION["s_permit"] = $result["permit"];
 
         /* DB 연결 종료 */
         mysqli_close($db);

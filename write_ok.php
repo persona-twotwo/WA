@@ -1,24 +1,30 @@
 <?php
-
+    require('TOP.php');
 
     require('db_connect.php');
     $db = db_connect('db_board');
     //각 변수에 write.php에서 input name값들을 저장한다
-    $username = $_POST['name'];
-    $userpw = password_hash($_POST['pw'], PASSWORD_DEFAULT);
     $title = $_POST['title'];
     $content = $_POST['content'];
-    echo "$username , $userpw , $title , $content<br/>";
-    if ($username && $userpw && $title && $content) {
-        $query = "INSERT INTO board (id, passwd, title, content) values('$username' ,'$userpw' ,'$title' , '$content')";
-        echo "쿼리문 작성 완료<br/>$query<br/>";
+    if ($s_permit < 2){
+        echo "<script>
+        alert('정회원 이상만 글을 작성할 수 있습니다.');
+        location.href='/';</script>";
+        exit;
+    }
+    if ($title && $content) {
+        echo "test<br>";
+
+        $query = "INSERT INTO board (writer_idx, title, content) values('$s_idx' ,'$title' , '$content')";
+        echo "result 완료<br/>$query<br/>";
+
         // $result = mysqli_query($db, $query);
         $result = $db->query($query);
         echo "result 완료<br/>$query<br/>";
         echo "$result<br/>";
         echo "<script>
         alert('글쓰기 완료되었습니다.');
-        location.href='index.php';</script>";
+        location.href='/';</script>";
     } else {
         echo "<script>
         alert('글쓰기에 실패했습니다.');

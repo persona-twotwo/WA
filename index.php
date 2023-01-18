@@ -1,22 +1,8 @@
 <?php
-session_start();
-
-$s_id = isset($_SESSION["s_id"])? $_SESSION["s_id"]:"";
-$s_name = isset($_SESSION["s_name"])? $_SESSION["s_name"]:"";
-
-
 require('TOP.php');
-
 
 require('db_connect.php');
 $db = db_connect('db_board');
-
-
-
-$query = "SELECT number, title, content FROM board";
-$result = mysqli_query($db, $query);
-// mysqli_free_result($result);
-
 ?>
 
 <!doctype html>
@@ -46,29 +32,23 @@ $result = mysqli_query($db, $query);
       <?php
       // board테이블에서 idx를 기준으로 내림차순해서 10개까지 표시
       $db = db_connect('db_board');
-      $query = "SELECT number, title, content,id,hit,date FROM board";
+      $query = "SELECT number, title, content,writer_idx,hit,date,good FROM board";
       $result = mysqli_query($db, $query);
       while ($board = mysqli_fetch_assoc($result)) {
       
-        //title변수에 DB에서 가져온 title을 선택
         $title = $board["title"];
-        // if(strlen($title)>30)
-        // { 
-        //   //title이 30을 넘어서면 ...표시
-        //   $title=str_replace($board["title"],mb_substr($board["title"],0,30,"utf-8")."...",$board["title"]);
-        // }
         ?>
         <tbody>
           <tr>
             <td width="70"><?php echo $board['number']; ?></td>
-            <td width="500"><a href="read.php?number=<?php echo $board['number'];?>">
-                <?php echo $title; ?>
-              </a></td>
-            <td width="120"><?php echo $board['id'] ?></td>
-            <td width="100">
-              <?php echo $board['date'] ?>
-            </td>
-            <td width="100"><?php echo $board['good']; ?></td>
+            <td width="500"><a href="read.php?number=<?php echo $board['number'];?>"><?php echo $title; ?></a></td>
+            <td width="120"><?php
+            $writer_idx = $board['writer_idx'];
+            $nickname = mysqli_fetch_array(mysqli_query($db, "SELECT nick FROM member WHERE number = '$writer_idx'"))[0];
+            echo $nickname;
+            ?></td>
+            <td width="100"><?php echo $board['date'] ?></td>
+            <td width="100"><?php echo $board['good'];?></td>
             <td width="100"><?php echo $board['hit']; ?></td>
           </tr>
         </tbody>

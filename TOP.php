@@ -1,8 +1,29 @@
 <?php
     session_start();
+    $s_idx = isset($_SESSION["s_idx"])? $_SESSION["s_idx"]:"";
     $s_id = isset($_SESSION["s_id"])? $_SESSION["s_id"]:"";
     $s_name = isset($_SESSION["s_name"])? $_SESSION["s_name"]:"";
-    echo "$s_id  ,  $s_name <br>"
+    $s_permit = isset($_SESSION["s_permit"])?$_SESSION["s_permit"]:0;
+    $s_perm ="";
+    switch ($s_permit){
+        case 0 : 
+            echo "$s_permit";
+            $s_perm ="비회원";
+            break;
+        case 1 : 
+            echo "test";
+            $s_perm ="이메일 인증 필요";
+            break;
+        case 2 : 
+            $s_perm ="정회원";
+            break;
+        case 3 : 
+            $s_perm ="관리진";
+        case 4 : 
+            $s_perm ="총괄";
+            break;
+        }
+    echo "$s_idx  ,  $s_name , $s_permit ,$s_perm<br>";
 ?>
 
 
