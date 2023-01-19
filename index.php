@@ -41,7 +41,7 @@ $db = db_connect('db_board');
         <tbody>
           <tr>
             <td width="70"><?php echo $board['number']; ?></td>
-            <td width="500"><a href="read.php?number=<?php echo $board['number'];?>"><?php echo $title; ?></a></td>
+            <td width="500"><a href="post_read.php?number=<?php echo $board['number'];?>"><?php echo $title; ?></a></td>
             <td width="120"><?php
             $writer_idx = $board['writer_idx'];
             $nickname = mysqli_fetch_array(mysqli_query($db, "SELECT nick FROM member WHERE number = '$writer_idx'"))[0];

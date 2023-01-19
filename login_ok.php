@@ -50,6 +50,7 @@ if(!$result){ // 아이디가 존재하지 않으면
         $_SESSION["s_name"] = $result["nick"];
         $_SESSION["s_id"] = $result["id"];
         $_SESSION["s_permit"] = $result["permit"];
+        echo "idx : ".$_SESSION["s_idx"]." / "."NAME : ".$_SESSION["s_name"]." / "."ID : ".$_SESSION["s_id"];
 
         /* DB 연결 종료 */
         mysqli_close($db);

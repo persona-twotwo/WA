@@ -7,17 +7,6 @@
     $hit = $result['hit'] + 1;
     mysqli_query($db,"UPDATE board SET hit = '$hit' WHERE number = '$number'");
 ?>
-<script type="text/javascript">
-  function test(){
-	<?php
-    mysqli_query($db,"UPDATE board SET hit = '$hit' WHERE number = '$number'");
-	?>
-
-  }
-
- 
-
-</script>
 
 
 <!doctype html>
@@ -43,10 +32,10 @@
 	<!-- 목록, 수정, 삭제 -->
 	<div id="bo_ser">
 		<ul>
-			<li><a href="javascript:test();">[추천 : <?php echo $result['good'] ?>]</a></li>
+			<li><a href="post_good.php?number=<?php echo $result['number']; ?>">[추천 : <?php echo $result['good'] ?>]</a></li>
 			<li><a href="/">[목록으로]</a></li>
-			<li><a href="modify.php?idx=<?php echo $board['idx']; ?>">[수정]</a></li>
-			<li><a href="delete.php?idx=<?php echo $board['idx']; ?>">[삭제]</a></li>
+			<li><a href="post_edit.php?number=<?php echo $result['number']; ?>">[수정]</a></li>
+			<li><a href="post_del.php?number=<?php echo $result['number']; ?>">[삭제]</a></li>
 		</ul>
 	</div>
 </div>

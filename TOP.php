@@ -19,6 +19,7 @@
             break;
         case 3 : 
             $s_perm ="관리진";
+            break;
         case 4 : 
             $s_perm ="총괄";
             break;
