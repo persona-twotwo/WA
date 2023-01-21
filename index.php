@@ -55,7 +55,7 @@ $db = db_connect('db_board');
       <?php } ?>
     </table>
     <div id="write_btn">
-      <a href="write.php"><button>글쓰기</button></a>
+      <a href="post_write.php"><button>글쓰기</button></a>
     </div>
   </div>
 </body>

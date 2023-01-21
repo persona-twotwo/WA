@@ -1,3 +1,4 @@
+
 nav {
     font-size: 12pt;
     font-family: 'PT Sans', Arial, Sans-serif;
@@ -95,4 +96,13 @@ menu{
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+#stat a{
+    color:rgb(55, 218, 229);
+    align-items:flex-end;
+}
+
+#stat a:hover {
+    color: #FFD400;
 }
