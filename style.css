@@ -14,6 +14,26 @@ ul li {
 	list-style:none;
 
 }
+/* 게시물 목록 */
+.number {
+	width: 5%;
+}
+.title {
+	width: 40%;
+}
+.writer {
+	width: 15%;
+}
+.date {
+	width: 15%;
+}
+.good {
+	width: 5%;
+}
+.hit {
+	width: 5%;
+}
+
 
 /* 공통 */
 .fl {
@@ -32,7 +52,7 @@ ul li {
 	margin-top: 40px;
 }
 .list-table thead th{
-	height:40px;
+	height:30px;
 	border-top:2px solid #09C;
 	border-bottom:1px solid #CCC;
 	font-weight: bold;

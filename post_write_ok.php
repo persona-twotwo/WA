@@ -6,6 +6,8 @@
     //각 변수에 write.php에서 input name값들을 저장한다
     $title = $_POST['title'];
     $content = $_POST['content'];
+
+    
     if ($s_permit < 2){
         echo "<script>
         alert('정회원 이상만 글을 작성할 수 있습니다.');
@@ -14,14 +16,17 @@
     }
     if ($title && $content) {
         echo "test<br>";
+        $number = mysqli_fetch_array(mysqli_query($db,"SELECT Auto_increment from information_schema.tables where table_schema = 'db_board' and table_name = 'board'"))[0];
+        $tmpfile =  $_FILES['b_file']['tmp_name'];
+        $o_name = $_FILES['b_file']['name'];
+        $dir = "upload/default/".$number;
+        $makeDir = mkdir($dir, 0777);
+        print_r($dir);
+        $folder = $dir."/".$o_name;
+        move_uploaded_file($tmpfile,$folder);
+        $query = "INSERT INTO board (writer_idx, title, content,file) values('$s_idx' ,'$title' , '$content','$o_name')";
 
-        $query = "INSERT INTO board (writer_idx, title, content) values('$s_idx' ,'$title' , '$content')";
-        echo "result 완료<br/>$query<br/>";
-
-        // $result = mysqli_query($db, $query);
-        $result = $db->query($query);
-        echo "result 완료<br/>$query<br/>";
-        echo "$result<br/>";
+        $result = mysqli_query($db, $query);
         echo "<script>
         alert('글쓰기 완료되었습니다.');
         location.href='/';</script>";

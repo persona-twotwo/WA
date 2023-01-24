@@ -1,4 +1,11 @@
-<?php require "TOP.php";?>
+<?php 
+  require "TOP.php";
+  if($s_permit != 0){
+    echo "<script>
+        alert('이미 로그인 된 상태입니다.');
+		    location.href='/';</script>";
+  }
+?>
 
 <title>로그인</title>
 
@@ -15,7 +22,6 @@
   .btn{background:#fff;border:1px solid #999;font-size:14px;padding:4px 10px}
   .btn_wrap{text-align:center}
 </style>
-
 <script type="text/javascript">
   function login_check(){
     var u_id = document.getElementById("u_id");

@@ -3,15 +3,23 @@
 	require "db_connect.php";
     $db = db_connect("db_board");
     $number = $_GET['number'];
-    $result = mysqli_fetch_array(mysqli_query($db,"SELECT * FROM board WHERE number =$number"));
-    $hit = $result['hit'] + 1;
-    mysqli_query($db,"UPDATE board SET hit = '$hit' WHERE number = '$number'");
+	
 	if($s_permit < 2) { 
 		echo "<script>
         alert('로그인 한 후 접속 가능합니다.');
-        history.back();</script>";
+		history.back();</script>";
 	}
 	
+	mysqli_query($db,"DELETE from hit where NOW() > expire_date");
+	$result = mysqli_fetch_array(mysqli_query($db,"SELECT * FROM board WHERE number =$number"));
+	$query = "SELECT EXISTS (select * from hit where post_number = $number and user_number = $s_idx)";
+	$hit = $result['hit'];
+	if(mysqli_fetch_array(mysqli_query($db,$query))[0]==0){
+		$hit = $hit + 1;
+		mysqli_query($db,"UPDATE board SET hit = '$hit' WHERE number = '$number'");
+		mysqli_query($db,"INSERT INTO hit (post_number, user_number) values($number, $s_idx)");
+
+	}
 ?>
 
 
@@ -24,7 +32,6 @@
 </head>
 <body>
 	
-    
     <!-- 글 표시 -->
 <div id="board_read">
 	<h2><?php echo $result['title']; ?></h2>
@@ -34,6 +41,9 @@
             $nickname = mysqli_fetch_array(mysqli_query($db, "SELECT nick FROM member WHERE number = '$writer_idx'"))[0];
             echo $nickname; ?> <?php echo $result['date']; ?> 조회:<?php echo $hit; ?>
 				<div id="bo_line"></div>
+			</div>
+			<div id="file_download">
+				파일 : <a href="upload/default/<?php echo $result['number']."/".$result['file']; ?>" download> <?php echo $result['file']?> </a>
 			</div>
 			<div id="bo_content">
 				<?php echo nl2br("$result[content]"); ?>
@@ -69,33 +79,27 @@
             echo $nickname;?></b></div>
 			<div class="dap_to comt_edit"><?php echo nl2br("$reply[content]"); ?></div>
 			<div class="rep_me dap_to"><?php echo $reply['date']; ?></div>
-			<?php if($s_idx ==  $repler_idx){ ?>
 			<div class="rep_me rep_menu">
-				<!-- <a class="dat_edit_bt" href="#">수정</a> -->
-				<!-- 삭제 요망 -->
 				<div class="two_button"	>
+					<?php if($s_idx ==  $repler_idx){ ?>
 					<form  class="button" action="reply_edit.php" method="post">
+						<input type="hidden" name="number" value="<?php echo $number; ?>" />
+						<input type="hidden" name="content" value="<?php echo $reply['content']; ?>" />
+						<input type="hidden" name="repler_idx" value="<?php echo $repler_idx; ?>" />
 						<input type="hidden" name="reply_number" value="<?php echo $reply['number']; ?>" />
 						<button type="submit">수정</button>
 					</form>
 					<!-- 댓글 삭제 -->
+					<?php } if(($s_permit >2) || ($s_idx == $writer_idx)||($s_idx ==  $repler_idx)){ ?>
 					<form class="button"action="reply_delete.php" method="post">
+						<input type="hidden" name="repler_idx" value="<?php echo $reply['repler_idx']; ?>" />
 						<input type="hidden" name="reply_number" value="<?php echo $reply['number']; ?>" />
 						<button type="submit">삭제</button>
 					</form>
+					<?php } ?>
 				</div>
 				<!--  -->
 			</div>
-			<?php }elseif (($s_permit >2) || ($s_idx == $writer_idx)) { ?>
-				<div class="rep_me rep_menu">
-				<!-- 댓글 삭제 -->
-				<form action="reply_delete.php" method="post">
-					<input type="hidden" name="reply_number" value="<?php echo $reply['number']; ?>" />
-					<button type="submit">삭제</button>
-				</form>
-				<!--  -->
-				</div>
-			<?php } ?>
 			<!-- 댓글 수정 폼 dialog -->
 			<div class="dat_edit">
 				<form method="post" action="reply_edit.php">

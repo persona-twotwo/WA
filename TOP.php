@@ -1,10 +1,12 @@
 <?php
+
     session_start();
     $s_idx = isset($_SESSION["s_idx"])? $_SESSION["s_idx"]:"";
     $s_id = isset($_SESSION["s_id"])? $_SESSION["s_id"]:"";
     $s_name = isset($_SESSION["s_name"])? $_SESSION["s_name"]:"";
     $s_permit = isset($_SESSION["s_permit"])?$_SESSION["s_permit"]:0;
     $s_perm ="";
+
     switch ($s_permit){
         case 0 : 
             $s_perm ="비회원";

@@ -8,7 +8,6 @@ function db_connect($db_database)
     $db_hostname = '********'; //enter DB_IP
     $db_username = 'root';     //enter DB_ID
     $db_password = '********'; //enter DB_PW
-    $db_port = '3306';         //enter DB_Port
     try {
         $db = mysqli_connect($db_hostname, $db_username, $db_password, $db_database);
       }

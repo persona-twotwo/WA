@@ -10,29 +10,31 @@ $db = db_connect('db_board');
 <head>
   <meta charset="UTF-8">
   <title>게시판</title>
-  <link rel="stylesheet" type="text/css" href="style.css" />
+  <link rel="stylesheet" type="text/css" href="style.css?112341" />
 </head>
 
 <body>
   <div id="board_area">
     <h1>자유게시판</h1>
     <h4>자유롭게 글을 쓸 수 있는 게시판입니다.</h4>
+    <div id="write_btn">
+      <a href="post_write.php"><button>글쓰기</button></a>
+    </div>
     <table class="list-table">
       <thead>
         <tr>
-          <th width="70">번호</th>
-          <th width="500">제목</th>
-          <th width="120">글쓴이</th>
-          <th width="100">작성일</th>
+          <th class="number">번호</th>
+          <th class="title">제목</th>
+          <th class="writer">글쓴이</th>
+          <th class="date">작성일</th>
           <!-- 추천수 항목 추가 -->
-          <th width="100">추천수</th>
-          <th width="100">조회수</th>
+          <th class="good">추천수</th>
+          <th class="hit">조회수</th>
         </tr>
       </thead>
       <?php
-      // board테이블에서 idx를 기준으로 내림차순해서 10개까지 표시
       $db = db_connect('db_board');
-      $query = "SELECT number, title, content,writer_idx,hit,date,good FROM board";
+      $query = "SELECT number, title, content,writer_idx,hit,date,good FROM board order by number DESC";
       $result = mysqli_query($db, $query);
       while ($board = mysqli_fetch_assoc($result)) {
       
@@ -40,23 +42,21 @@ $db = db_connect('db_board');
         ?>
         <tbody>
           <tr>
-            <td width="70"><?php echo $board['number']; ?></td>
-            <td width="500"><a href="post_read.php?number=<?php echo $board['number'];?>"><?php echo $title; ?></a></td>
-            <td width="120"><?php
+            <td class="number"><?php echo $board['number']; ?></td>
+            <td class="title"><a href="post_read.php?number=<?php echo $board['number'];?>"><?php echo $title; ?></a></td>
+            <td class="writer"><?php
             $writer_idx = $board['writer_idx'];
             $nickname = mysqli_fetch_array(mysqli_query($db, "SELECT nick FROM member WHERE number = '$writer_idx'"))[0];
             echo $nickname;
             ?></td>
-            <td width="100"><?php echo $board['date'] ?></td>
-            <td width="100"><?php echo $board['good'];?></td>
-            <td width="100"><?php echo $board['hit']; ?></td>
+            <td class="date"><?php echo $board['date'] ?></td>
+            <td class="good"><?php echo $board['good'];?></td>
+            <td class="hit"><?php echo $board['hit']; ?></td>
           </tr>
         </tbody>
       <?php } ?>
     </table>
-    <div id="write_btn">
-      <a href="post_write.php"><button>글쓰기</button></a>
-    </div>
+    
   </div>
 </body>
 

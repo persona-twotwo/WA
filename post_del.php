@@ -14,8 +14,9 @@
         exit;
     }
     $query = "DELETE FROM board WHERE number = '$number'";
-    print_r($query);
-    $result = (mysqli_query($db, $query));
+    mysqli_query($db, $query);
+    $dir = "upload/default/".$number;
+    rmdir($dir);
     echo "<script>
         alert('삭제가 완료되었습니다.');
         location.href = \"/\";

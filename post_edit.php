@@ -39,7 +39,7 @@
                 <div class="wi_line"></div>
                 
                 <div id="in_content">
-                    <textarea name="content" id="ucontent" placeholder="내용" required><?php echo "$title"; ?></textarea>
+                    <textarea name="content" id="ucontent" placeholder="내용" required><?php echo "$content"; ?></textarea>
                 </div>
                 <div class="bt_se">
                     <button type="submit">글 수정</button>

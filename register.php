@@ -21,6 +21,7 @@ require('TOP.php');
 </style>
 
 <script type="text/javascript">
+  let regex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
   function register_check(){
     var u_id = document.getElementById("u_id");
     var u_nick = document.getElementById("u_nick");
@@ -54,11 +55,11 @@ require('TOP.php');
     };
 
 
-    if(u_email.value.length < 1 || u_email.value.length > 100){
-        var err_txt = document.querySelector(".err_email");
-        err_txt.textContent = "이메일은 1~100글자만 입력할 수 있습니다.";
-        u_email.focus();
-        access = 0;
+    if(!regex.test(u_email.value)){
+      var err_txt = document.querySelector(".err_email");
+      err_txt.textContent = "올바른 형식의 이메일을 입력해야 합니다."
+      u_email.focus();
+      access = 0;
         
     };
 
