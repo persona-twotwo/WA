@@ -18,5 +18,8 @@ function db_connect($db_database)
     return $db;
 }
 
+function google_password(){
+  return "*********"; //구글 앱 비밀번호 (php mailer 용)
+}
 
 ?>

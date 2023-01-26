@@ -7,7 +7,7 @@
 	if($s_permit < 2) { 
 		echo "<script>
         alert('로그인 한 후 접속 가능합니다.');
-		history.back();</script>";
+		location.href='/';</script>";
 	}
 	
 	mysqli_query($db,"DELETE from hit where NOW() > expire_date");
@@ -17,7 +17,7 @@
 	if(mysqli_fetch_array(mysqli_query($db,$query))[0]==0){
 		$hit = $hit + 1;
 		mysqli_query($db,"UPDATE board SET hit = '$hit' WHERE number = '$number'");
-		mysqli_query($db,"INSERT INTO hit (post_number, user_number) values($number, $s_idx)");
+		mysqli_query($db,"INSERT INTO hit (category, post_number, user_number) values(1,$number, $s_idx)");
 
 	}
 ?>
@@ -43,7 +43,13 @@
 				<div id="bo_line"></div>
 			</div>
 			<div id="file_download">
-				파일 : <a href="upload/default/<?php echo $result['number']."/".$result['file']; ?>" download> <?php echo $result['file']?> </a>
+				<?php 
+    				if($result['file']!=''){ 
+						$file_dir = "upload/default/".$result['number']."/".$result['file'];
+						?>
+
+				파일 : <a href="<?php echo $file_dir ?>" download> <?php echo $result['file']?> </a>
+				<?php  } ?>
 			</div>
 			<div id="bo_content">
 				<?php echo nl2br("$result[content]"); ?>
@@ -51,10 +57,22 @@
 	<!-- 목록, 수정, 삭제 -->
 	<div id="bo_ser">
 		<ul>
-			<li><a href="post_good.php?number=<?php echo $result['number']; ?>">[추천 : <?php echo $result['good'] ?>]</a></li>
+			<li><a href="post_good.php?number=<?php echo $result['number']; ?>">[추천 : <?php 
+			echo $result['good'];
+			$query = "SELECT EXISTS (select * from good where post_number = $number and user_number = $s_idx)";
+			if(mysqli_fetch_row(mysqli_query($db,$query))[0]){
+				echo "❤️";
+			}
+			?>
+			]</a></li>
 			<li><a href="/">[목록으로]</a></li>
-			<li><a href="post_edit.php?number=<?php echo $result['number']; ?>">[수정]</a></li>
+			<?php if($s_idx == $writer_idx){ ?>
+				<li><a href="post_edit.php?number=<?php echo $result['number']; ?>">[수정]</a></li>
+			<?php } ?>
+			<?php
+			if(($s_permit >2) || ($s_idx == $writer_idx)){ ?>
 			<li><a href="post_del.php?number=<?php echo $result['number']; ?>">[삭제]</a></li>
+			<?php }?>
 		</ul>
 	</div>
 </div>
@@ -66,11 +84,10 @@
 			$query = "SELECT * FROM comment WHERE board_number='$number' order by number desc";
 			$result = (mysqli_query($db,$query));
 			while($reply= mysqli_fetch_assoc($result)){
-				if($reply['del']==1){ ?>
-				<div class="dap_lo">😢삭제된 댓글입니다.</div>
-
-				<?php continue; } 
-				?>
+				if($reply['del']==1){ 
+					echo "<div class='dap_lo'>😢삭제된 댓글입니다.</div>";
+					continue; 
+					} ?>
 
 		<div class="dap_lo">
 			<div><b><?php 

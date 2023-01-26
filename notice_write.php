@@ -11,9 +11,9 @@
 
 <body>
     <div id="board_write">
-        <h1><a>자유게시판</a></h1>
+        <h1><a>공지사항</a></h1>
         <div id="write_area">
-            <form action="post_write_ok.php" method="post" enctype="multipart/form-data">
+            <form action="notice_write_ok.php" method="post" enctype="multipart/form-data">
                 <div id="in_title">
                     <textarea name="title" id="utitle" rows="1" cols="55" placeholder="제목" maxlength="100"
                         required></textarea>

@@ -11,15 +11,15 @@
 
 <body>
     <div id="board_write">
-        <h1><a>자유게시판</a></h1>
+        <h1><a>Q&A</a></h1>
         <div id="write_area">
-            <form action="post_write_ok.php" method="post" enctype="multipart/form-data">
+            <form action="qna_write_ok.php" method="post" enctype="multipart/form-data">
                 <div id="in_title">
                     <textarea name="title" id="utitle" rows="1" cols="55" placeholder="제목" maxlength="100"
                         required></textarea>
                 </div>
                 <div class="wi_line"></div>
-                
+                <div class="secret"><label>비밀글<input type="checkbox" name="secret" value=1></label></div>
                 <div id="in_content">
                     <textarea name="content" id="ucontent" placeholder="내용" required></textarea>
                 </div>

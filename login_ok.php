@@ -13,7 +13,7 @@ require "db_connect.php";
 $db = db_connect("db_board");
 
 /* 쿼리 작성 */
-$querry = "SELECT id, passwd, nick, number, permit FROM member WHERE id='$u_id';";
+$querry = "SELECT id, passwd, nick, number, permit, email FROM member WHERE id='$u_id';";
 // echo $sql;
 /* 쿼리 전송(연결 객체) */
 $result = mysqli_fetch_array(mysqli_query($db, $querry));
@@ -50,7 +50,6 @@ if(!$result){ // 아이디가 존재하지 않으면
         $_SESSION["s_name"] = $result["nick"];
         $_SESSION["s_id"] = $result["id"];
         $_SESSION["s_permit"] = $result["permit"];
-        echo "idx : ".$_SESSION["s_idx"]." / "."NAME : ".$_SESSION["s_name"]." / "."ID : ".$_SESSION["s_id"];
 
         /* DB 연결 종료 */
         mysqli_close($db);

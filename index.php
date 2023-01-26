@@ -17,9 +17,11 @@ $db = db_connect('db_board');
   <div id="board_area">
     <h1>자유게시판</h1>
     <h4>자유롭게 글을 쓸 수 있는 게시판입니다.</h4>
-    <div id="write_btn">
-      <a href="post_write.php"><button>글쓰기</button></a>
-    </div>
+    <?php if($s_permit > 0){ ?>
+      <div id="write_btn">
+        <a href="post_write.php"><button>글쓰기</button></a>
+      </div>
+    <?php } ?>
     <table class="list-table">
       <thead>
         <tr>
@@ -34,7 +36,7 @@ $db = db_connect('db_board');
       </thead>
       <?php
       $db = db_connect('db_board');
-      $query = "SELECT number, title, content,writer_idx,hit,date,good FROM board order by number DESC";
+      $query = "SELECT number, title, writer_idx, hit, date, good FROM board order by number DESC";
       $result = mysqli_query($db, $query);
       while ($board = mysqli_fetch_assoc($result)) {
       

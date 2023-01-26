@@ -53,7 +53,6 @@ if ($result != 0){
 
 
 $querry = "INSERT INTO member (id, passwd, nick, email) values('$u_id', '$pwd', '$u_nick', '$u_email')";
-echo $querry;
 
 /* 쿼리 전송(연결 객체) */
 $result = mysqli_query($db, $querry);

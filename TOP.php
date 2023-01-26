@@ -37,9 +37,9 @@
                 <li><a href="/">자유게시판</a></li>
                 <li><a href="notice.php">공지사항</a></li>
                 <li><a href="qna.php">Q&A</a></li>
-                <li><a href="mariadb_test.php">About</a></li>
+                <!-- <li><a href="mariadb_test.php">About</a></li>
                 <li><a href="">Contact</a></li>
-                <li><a href="info.php">info.php</a></li>
+                <li><a href="info.php">info.php</a></li> -->
                 <?php if (!$s_id){ ?>
                 <li><a href="login.php">login</a></li>
                 <li><a href="register.php">register</a></li>
