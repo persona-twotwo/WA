@@ -18,6 +18,9 @@ ul li {
 .number {
 	width: 5%;
 }
+.category {
+	width: 10%;
+}
 .title {
 	width: 40%;
 }
@@ -186,4 +189,9 @@ ul li {
 }
 #foot_box {
 	height: 50px; 
+}
+
+#search_word{
+	width:70%;
+	height: 15px; 
 }

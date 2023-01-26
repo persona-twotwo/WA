@@ -37,6 +37,7 @@
                 <li><a href="/">자유게시판</a></li>
                 <li><a href="notice.php">공지사항</a></li>
                 <li><a href="qna.php">Q&A</a></li>
+                <li><a href="search.php">검색</a></li>
                 <!-- <li><a href="mariadb_test.php">About</a></li>
                 <li><a href="">Contact</a></li>
                 <li><a href="info.php">info.php</a></li> -->

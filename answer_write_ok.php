@@ -11,7 +11,7 @@
     if ($s_permit < 3){
         echo "<script>
         alert('관리자만 답변을 작성할 수 있습니다.');
-        location.href='/';</script>";
+        history.go(-2);</script>";
         exit;
     }
 
@@ -31,7 +31,7 @@
 
         echo "<script>
         alert('글쓰기 완료되었습니다.');
-        location.href='/qna.php';</script>";
+        history.go(-2);</script>";
     } 
     else {
         echo "<script>
