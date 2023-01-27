@@ -41,6 +41,12 @@ require('TOP.php');
     return regExp.test(asValue); // 형식에 맞는 경우 true 리턴
   }
 
+  function isNick(asValue) {
+    var regExp = /^[a-zA-Zㄱ-힣0-9]{4,10}$/;
+  
+    return regExp.test(asValue);
+  }
+
   function register_check(){
     var u_id = document.getElementById("u_id");
     var u_nick = document.getElementById("u_nick");
@@ -48,12 +54,7 @@ require('TOP.php');
     var pwd = document.getElementById("pwd");
     var access = 1;
 
-    if(!isId(u_id.value)){
-        var err_txt = document.querySelector(".err_id");
-        err_txt.textContent = "아이디는 영어와 숫자를 사용할수 있고, 영어로 시작하는 8~20글자만 사용할 수 있습니다.";
-        u_id.focus();
-        access = 0;
-    };
+    
 
 
     if(!isPassword(pwd.value)){
@@ -62,16 +63,22 @@ require('TOP.php');
         pwd.focus();
         access = 0;
 
-    };
+    }else{
+      var err_txt = document.querySelector(".err_pwd");
+      err_txt.textContent = "";
+    }
 
 
-    if(u_nick.value.length < 4 || u_nick.value.length > 11){
+    if(!isNick(u_nick.value)){
         var err_txt = document.querySelector(".err_nick");
-        err_txt.textContent = "닉네임은 4~10글자만 입력할 수 있습니다.";
+        err_txt.textContent = "닉네임은 4~10글자로 특수문자를 사용할 수 없습니다.";
         u_nick.focus();
         access = 0;
         
-    };
+    }else{
+      var err_txt = document.querySelector(".err_nick");
+      err_txt.textContent = "";
+    }
 
 
     if(!isEmail(u_email.value)){
@@ -80,10 +87,24 @@ require('TOP.php');
       u_email.focus();
       access = 0;
         
-    };
+    }else{
+      var err_txt = document.querySelector(".err_email");
+      err_txt.textContent = "";
+    }
+
+    if(!isId(u_id.value)){
+        var err_txt = document.querySelector(".err_id");
+        err_txt.textContent = "아이디는 영어로 시작해야 하고 영어와 숫자의 조합으로 8~20글자만 사용할 수 있습니다.";
+        u_id.focus();
+        access = 0;
+    }else{
+      var err_txt = document.querySelector(".err_id");
+      err_txt.textContent = "";
+    }
 
     if (access == 0){
       return false;
+      exit();
     };
   };
 

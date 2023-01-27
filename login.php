@@ -27,23 +27,32 @@
     var u_id = document.getElementById("u_id");
     var pwd = document.getElementById("pwd");
     var access = 1 ;
+    function isId(asValue) {
+      var regExp = /^[a-z]+[a-z0-9]{8,19}$/g;
+    
+      return regExp.test(asValue);
+    }
 
-    var u_id_len = u_id.value.length;
-    if( u_id_len < 8 || u_id_len > 20){
+    function isPassword(asValue) {
+      var regExp = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
+    
+      return regExp.test(asValue); // 형식에 맞는 경우 true 리턴
+    }
+
+    if(!isId(u_id.value)){
         var err_txt = document.querySelector(".err_id");
-        err_txt.textContent = "아이디는 8~20글자만 입력할 수 있습니다.";
+        err_txt.textContent = "올바른 아이디 형식이 아닙니다.";
         u_id.focus();
         access = 0;
     };
 
 
-    var pwd_len = pwd.value.length;
-    if( pwd_len < 8 || pwd_len > 20){
+    if(!isPassword(pwd.value)){
         var err_txt = document.querySelector(".err_pwd");
-        err_txt.textContent = "비밀번호는 8~20글자만 입력할 수 있습니다.";
+        err_txt.textContent = "올바른 비밀번호 형식이 아닙니다.";
         pwd.focus();
         access = 0;
-        
+
     };
 
     if (access == 0){
