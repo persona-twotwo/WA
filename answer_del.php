@@ -15,7 +15,6 @@
     }
 
     $query = "UPDATE qna SET answer=0, answer_title=NULL, answer_content=NULL, answer_file=NULL, answer_date=NULL WHERE number = '$number'";
-    echo $query;
     mysqli_query($db, $query);
     $del_dir = "upload/qna/".$number."/answer";
 

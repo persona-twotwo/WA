@@ -78,7 +78,6 @@ function chk_form() {
           $query .= "DESC ";
           break;
       }
-      echo $query;
 
       $result = mysqli_query($db, $query);
       while ($board = mysqli_fetch_assoc($result)) {
