@@ -55,9 +55,11 @@
         <br>
         <span class="err_pwd"></span>
       </p>
+      <?php if($s_permit<2){ ?>   
       <p class="btn_wrap">
         <button type="submit" class="btn">이메일 인증</button>
       </p>
+      <?php } ?>
     </fieldset>
   </form>
 </body>
