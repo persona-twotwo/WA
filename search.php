@@ -120,7 +120,6 @@ function chk_form() {
 
         $query = implode(" UNION ", $querys);
         $query .= " ORDER BY date DESC";
-        echo $query;
         $result = mysqli_query($db, $query);
       while ($board = mysqli_fetch_assoc($result)) {
       
