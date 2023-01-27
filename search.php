@@ -6,7 +6,8 @@ require('TOP.php');
 
 require('db_connect.php');
 $db = db_connect('db_board');
-$category = isset($_GET['$category'])?$_GET['$category']:0;
+$category = isset($_GET['category'])? $_GET['category']:0;
+
 $search = isset($_GET['search'])?$_GET['search']:0;
 
 switch ($_GET['search']) {
@@ -119,6 +120,7 @@ function chk_form() {
 
         $query = implode(" UNION ", $querys);
         $query .= " ORDER BY date DESC";
+        echo $query;
         $result = mysqli_query($db, $query);
       while ($board = mysqli_fetch_assoc($result)) {
       

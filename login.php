@@ -39,22 +39,29 @@
       return regExp.test(asValue); // 형식에 맞는 경우 true 리턴
     }
 
+    
+    
+    if(!isPassword(pwd.value)){
+      var err_txt = document.querySelector(".err_pwd");
+      err_txt.textContent = "올바른 비밀번호 형식이 아닙니다.";
+      pwd.focus();
+      access = 0;
+      
+    }else{
+      var err_txt = document.querySelector(".err_pwd");
+      err_txt.textContent = "";
+    }
+
     if(!isId(u_id.value)){
         var err_txt = document.querySelector(".err_id");
         err_txt.textContent = "올바른 아이디 형식이 아닙니다.";
         u_id.focus();
         access = 0;
-    };
-
-
-    if(!isPassword(pwd.value)){
-        var err_txt = document.querySelector(".err_pwd");
-        err_txt.textContent = "올바른 비밀번호 형식이 아닙니다.";
-        pwd.focus();
-        access = 0;
-
-    };
-
+    }else{
+      var err_txt = document.querySelector(".err_id");
+      err_txt.textContent = "";
+    }
+    
     if (access == 0){
       return false;
     };
