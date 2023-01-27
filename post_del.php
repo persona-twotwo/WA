@@ -15,6 +15,10 @@
     }
     $query = "DELETE FROM board WHERE number = '$number'";
     mysqli_query($db, $query);
+    $query = "DELETE FROM comment WHERE board_number = '$number'";
+    mysqli_query($db, $query);
+    $query = "DELETE FROM good WHERE post_number = '$number'";
+    mysqli_query($db, $query);
     $del_dir = "upload/default/".$number;
 
     function rmdir_ok($dir) {
