@@ -4,7 +4,7 @@ session_start();
 
 /* 이전 페이지에서 값 가져오기 */
 $u_id = $_POST["u_id"];
-$pwd = $_POST["pwd"];
+$user_passwd = $_POST["pwd"];
 
 
 
@@ -34,16 +34,9 @@ if(!$result){ // 아이디가 존재하지 않으면
         </script>
     ";
     exit;
-} else{ // 아이디가 존재하면
-    if(password_verify($user_passwd, $db_passwd)){
-        echo "
-            <script type=\"text/javascript\">
-                alert(\"비밀번호가 일치하지 않습니다.\");
-                history.back();
-            </script>
-        ";
-    exit;
-    } else{ // 비밀번호가 일치한다면
+} else{
+    if(password_verify($user_passwd, $result['passwd'])){
+        // 비밀번호가 일치한다면
         // 세션 변수 생성
         // $_SESSION["세션변수명"] = 저장할 값;
         $_SESSION["s_idx"] = $result["number"];
@@ -60,6 +53,15 @@ if(!$result){ // 아이디가 존재하지 않으면
                 location.href = \"/\";
             </script>
         ";
+    } else{ 
+
+        echo "
+            <script type=\"text/javascript\">
+                alert(\"비밀번호가 일치하지 않습니다.\");
+                // history.back();
+            </script>
+        ";
+    exit;
     };
 };
 
