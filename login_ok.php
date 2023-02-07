@@ -58,7 +58,7 @@ if(!$result){ // 아이디가 존재하지 않으면
         echo "
             <script type=\"text/javascript\">
                 alert(\"비밀번호가 일치하지 않습니다.\");
-                // history.back();
+                history.back();
             </script>
         ";
     exit;
