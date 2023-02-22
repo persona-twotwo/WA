@@ -1,5 +1,15 @@
 <?php
 /* 세션 실행 */
+$cookieParams = session_get_cookie_params();
+session_set_cookie_params(
+    600,
+    $cookieParams["/"],
+    $cookieParams["wa.prox.persona-twotwo.com"],
+    true,  // make cookie HTTPS-only
+    true   // make cookie HTTP-only
+);
+
+// Start the session
 session_start();
 
 /* 이전 페이지에서 값 가져오기 */

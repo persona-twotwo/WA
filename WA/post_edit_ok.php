@@ -5,8 +5,8 @@
     $db = db_connect('db_board');
     $number = $_GET['number'];
     //각 변수에 write.php에서 input name값들을 저장한다
-    $title = $_POST['title'];
-    $content = $_POST['content'];
+    $title = htmlspecialchars($_POST['title'], ENT_QUOTES);
+    $content = htmlspecialchars($_POST['content'], ENT_QUOTES);
     if ($s_permit < 2){
         echo "<script>
         alert('정회원 이상만 글을 수정할 수 있습니다.');

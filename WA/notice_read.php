@@ -40,12 +40,16 @@
 				<div id="bo_line"></div>
 			</div>
 			<div id="file_download">
-				<?php 
+			<?php 
     				if($result['file']!=''){ 
-						$file_dir = "upload/notice/".$result['number']."/".$result['file'];
 						?>
 
-				파일 : <a href="<?php echo $file_dir ?>" download> <?php echo $result['file']?> </a>
+				파일 : <?php echo $result['file']?>
+				<form action="file_download.php" method="post">
+					<input type="hidden" name="option1" value="1" >
+					<input type="hidden" name="option2" value="<?=$result['number']?>">
+					<input type="submit" value="다운로드">
+				</form>
 				<?php  } ?>
 			</div>
 			<div id="bo_content">

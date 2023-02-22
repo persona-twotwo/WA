@@ -3,7 +3,7 @@ require('TOP.php');
 require "db_connect.php";
 $db = db_connect('db_board');
 $number =   $_GET['number'];
-$content =   $_POST['content'];
+$content = htmlspecialchars($_POST['content'], ENT_QUOTES);
 $query = "INSERT INTO comment (writer_idx, board_number,content) values('$s_idx' ,'$number' , '$content')";
 $result = mysqli_query($db,$query);
 echo "<script>

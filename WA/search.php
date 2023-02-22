@@ -24,6 +24,7 @@ switch ($_GET['search']) {
 }
 
 $word = isset($_GET['word'])?$_GET['word']:"";
+$word = htmlspecialchars($word, ENT_QUOTES);
 echo "<script>
 function chk_form() {
     document.getElementById('category_search').submit()

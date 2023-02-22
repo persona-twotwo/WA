@@ -1,7 +1,17 @@
 <?php
 header("Content-Type: text/html; charset=UTF-8");
-header('X-Frame-Options: DENY');
-    session_start();
+header('X-Frame-Options:DENY');
+$cookieParams = session_get_cookie_params();
+session_set_cookie_params(
+    600,
+    $cookieParams["/"],
+    $cookieParams["wa.prox.persona-twotwo.com"],
+    true,  // make cookie HTTPS-only
+    true   // make cookie HTTP-only
+);
+
+// Start the session
+session_start();
     $s_idx = isset($_SESSION["s_idx"])? $_SESSION["s_idx"]:"";
     $s_id = isset($_SESSION["s_id"])? $_SESSION["s_id"]:"";
     $s_name = isset($_SESSION["s_name"])? $_SESSION["s_name"]:"";

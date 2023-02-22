@@ -1,5 +1,15 @@
 <?php
 /* 세션 실행 */
+$cookieParams = session_get_cookie_params();
+session_set_cookie_params(
+    600,
+    $cookieParams["/"],
+    $cookieParams["wa.prox.persona-twotwo.com"],
+    true,  // make cookie HTTPS-only
+    true   // make cookie HTTP-only
+);
+
+// Start the session
 session_start();
 
 /* 이전 페이지에서 값 가져오기 */
@@ -29,7 +39,7 @@ if(!$result){ // 아이디가 존재하지 않으면
     // 메세지 출력 후 이전 페이지로 이동
     echo "
         <script type=\"text/javascript\">
-            alert(\"일치하는 아이디가 없습니다.\");
+            alert(\"로그인 실패.\");
             history.back();
         </script>
     ";
@@ -57,7 +67,7 @@ if(!$result){ // 아이디가 존재하지 않으면
 
         echo "
             <script type=\"text/javascript\">
-                alert(\"비밀번호가 일치하지 않습니다.\");
+                alert(\"로그인 실패.\");
                 history.back();
             </script>
         ";

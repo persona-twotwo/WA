@@ -45,10 +45,14 @@
 			<div id="file_download">
 				<?php 
     				if($result['file']!=''){ 
-						$file_dir = "upload/default/".$result['number']."/".$result['file'];
 						?>
 
-				파일 : <a href="<?php echo $file_dir ?>" download> <?php echo $result['file']?> </a>
+				파일 : <?php echo $result['file']?>
+				<form action="file_download.php" method="post">
+					<input type="hidden" name="option1" value="0" >
+					<input type="hidden" name="option2" value="<?=$result['number']?>">
+					<input type="submit" value="다운로드">
+				</form>
 				<?php  } ?>
 			</div>
 			<div id="bo_content">
